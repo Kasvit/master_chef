@@ -40,30 +40,30 @@ group :development, :test do
   gem "brakeman", require: false
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
-  gem 'dotenv-rails'
-  gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'rspec-rails'
-  gem 'rubocop-rails-omakase', require: false
-  gem 'shoulda-matchers'
-  gem 'vcr'
-  gem 'webmock'
+  gem "dotenv-rails"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "rspec-rails"
+  gem "rubocop-rails-omakase", require: false
+  gem "shoulda-matchers"
+  gem "vcr"
+  gem "webmock"
 end
 
 group :development do
-  gem 'annotaterb'
-  gem 'debase'
-  gem 'rubocop-factory_bot', require: false
-  gem 'rubocop-lsp'
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
-  gem 'rubocop-rspec', require: false
-  gem 'rubocop-rspec_rails', require: false
-  gem 'ruby-debug-ide'
-  gem 'ruby-lsp'
-  gem 'ruby-lsp-rails'
-  gem 'ruby-lsp-rspec'
-  gem 'standard'
+  gem "annotaterb"
+  gem "debase"
+  gem "rubocop-factory_bot", require: false
+  gem "rubocop-lsp"
+  gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
+  gem "rubocop-rspec_rails", require: false
+  gem "ruby-debug-ide"
+  gem "ruby-lsp"
+  gem "ruby-lsp-rails"
+  gem "ruby-lsp-rspec"
+  gem "standard"
 end
 
-gem 'rails_rate_limit', '~> 0.1.0' # my own gem
+gem "rails_rate_limit", "~> 0.1.0" # my own gem

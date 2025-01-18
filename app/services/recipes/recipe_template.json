@@ -1,0 +1,28 @@
+{
+  "name": "salad",
+  "ingredients": "lettuce, tomato, cucumber",
+  "instructions": [
+    { 
+      "step":  "prepare", 
+      "description": "prepare the ingredients" 
+    },
+    {
+      "step": "chop the lettuce",
+      "description": "chop the lettuce"
+    },
+    {
+      "step": "chop the tomato",
+      "description": "chop the tomato"
+    },
+    {
+      "step": "chop the cucumber",
+      "description": "chop the cucumber"
+    },
+    {
+      "step": "mix the ingredients",
+      "description": "mix the ingredients"
+    }
+  ],
+  "cooking_time": "10 minutes",
+  "error": ""
+}
