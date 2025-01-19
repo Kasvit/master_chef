@@ -6,8 +6,8 @@ class Ai::Claude < Ai::Base
       parameters: {
         model: "claude-3-haiku-20240307",
         messages: [
-          {"role": "user", "content": prompt},
-          {"role": "assistant", "content": "type => JSON"}
+          { "role": "user", "content": prompt },
+          { "role": "assistant", "content": "type => JSON" }
         ],
         max_tokens: 1000
       }

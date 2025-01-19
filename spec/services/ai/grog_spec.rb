@@ -19,8 +19,8 @@ RSpec.describe Ai::Groq do
     end
 
     context 'when the prompt is invalid' do
-      let(:ingredients) { '' }  
-      
+      let(:ingredients) { '' }
+
       it 'returns an error message' do
         VCR.use_cassette('ai/groq/failed_generates_recipe') do
           result = groq.call

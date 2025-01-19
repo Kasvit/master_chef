@@ -36,20 +36,29 @@ function RecipeGenerator() {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center py-12">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
   }
 
   if (error) {
     return (
-      <>
-        <p>{error}</p>
-        <button onClick={handleRefresh}>Try again</button>
-      </>
-    )
+      <div className="text-center py-8">
+        <p className="text-red-600 mb-4">{error}</p>
+        <button 
+          onClick={handleRefresh}
+          className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+        >
+          Try again
+        </button>
+      </div>
+    );
   }
 
   return (
-    <>
+    <div className="space-y-8">
       <RecipeGeneratorForm 
         onSubmit={handleSubmit} 
         ingredients={ingredients} 
@@ -59,13 +68,20 @@ function RecipeGenerator() {
         softMode={softMode} 
         setSoftMode={setSoftMode}
       />
-      {recipe && 
-        <>
+      {recipe && (
+        <div className="space-y-6">
           <Recipe recipe={recipe} />
-          <button onClick={handleRefresh}>Refresh</button>
-        </>
-      }
-    </>
+          <div className="text-center">
+            <button 
+              onClick={handleRefresh}
+              className="bg-gray-200 text-gray-800 py-2 px-6 rounded-lg hover:bg-gray-300 transition-colors duration-200"
+            >
+              Start Over
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 
