@@ -1,0 +1,99 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.anthropic.com/v1/messages
+    body:
+      encoding: UTF-8
+      string: '{"model":"claude-3-haiku-20240307","messages":[{"role":"user","content":"You
+        are a world-class chef and you are given a string of ingredients: chicken,
+        salt, pepper. You know how to cook with them.\nYou can''t use any other ingredients
+        than the ones you are given.\nYou must return a recipe in the format of the
+        following format \u003cJSON\u003e.\nExample of the structure:\n\n```json\n{\n  \"name\":
+        \"salad\",\n  \"ingredients\": \"lettuce, tomato, cucumber\",\n  \"instructions\":
+        [\n    { \n      \"step\":  \"prepare\", \n      \"description\": \"prepare
+        the ingredients\" \n    },\n    {\n      \"step\": \"chop the lettuce\",\n      \"description\":
+        \"chop the lettuce\"\n    },\n    {\n      \"step\": \"chop the tomato\",\n      \"description\":
+        \"chop the tomato\"\n    },\n    {\n      \"step\": \"chop the cucumber\",\n      \"description\":
+        \"chop the cucumber\"\n    },\n    {\n      \"step\": \"mix the ingredients\",\n      \"description\":
+        \"mix the ingredients\"\n    }\n  ],\n  \"cooking_time\": \"10 minutes\",\n  \"error\":
+        \"\"\n}\n```\n\nRecipe structure:\n- name: string\n- ingredients: string with
+        the same ingredients as the ones you are given\n- instructions: array of objects
+        with the following structure:\n  - step: string\n  - description: string\n-
+        cooking_time: string\n- error: string\n\n\nRequirements:\n- Validate the ingredients.
+        If the ingredients are not valid, return an error message in the error field.\n-
+        Return the ingredients string with the ALL used ingredients.\n- Return ONLY
+        a valid JSON structure without explanation, code, or other blocks and descriptions.\n\n"}],"max_tokens":1000}'
+    headers:
+      X-Api-Key:
+      - "<ANTHROPIC_API_KEY>"
+      Anthropic-Version:
+      - '2023-06-01'
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 19 Jan 2025 13:39:34 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Anthropic-Ratelimit-Requests-Limit:
+      - '50'
+      Anthropic-Ratelimit-Requests-Remaining:
+      - '49'
+      Anthropic-Ratelimit-Requests-Reset:
+      - '2025-01-19T13:39:34Z'
+      Anthropic-Ratelimit-Input-Tokens-Limit:
+      - '50000'
+      Anthropic-Ratelimit-Input-Tokens-Remaining:
+      - '50000'
+      Anthropic-Ratelimit-Input-Tokens-Reset:
+      - '2025-01-19T13:39:33Z'
+      Anthropic-Ratelimit-Output-Tokens-Limit:
+      - '10000'
+      Anthropic-Ratelimit-Output-Tokens-Remaining:
+      - '10000'
+      Anthropic-Ratelimit-Output-Tokens-Reset:
+      - '2025-01-19T13:39:34Z'
+      Anthropic-Ratelimit-Tokens-Limit:
+      - '60000'
+      Anthropic-Ratelimit-Tokens-Remaining:
+      - '60000'
+      Anthropic-Ratelimit-Tokens-Reset:
+      - '2025-01-19T13:39:33Z'
+      Request-Id:
+      - req_012eLS2sMMSF7xTx25i8rieV
+      Via:
+      - 1.1 google
+      Cf-Cache-Status:
+      - DYNAMIC
+      X-Robots-Tag:
+      - none
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 90473b43de302492-KBP
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"msg_01GfyWhj8poC4RXX27GQCsZ8","type":"message","role":"assistant","model":"claude-3-haiku-20240307","content":[{"type":"text","text":"{\n  \"name\":
+        \"Chicken with Salt and Pepper\",\n  \"ingredients\": \"chicken, salt, pepper\",\n  \"instructions\":
+        [\n    {\n      \"step\": \"season the chicken\",\n      \"description\":
+        \"Season the chicken with salt and pepper\"\n    },\n    {\n      \"step\":
+        \"cook the chicken\",\n      \"description\": \"Cook the chicken until it
+        is fully cooked through\"\n    }\n  ],\n  \"cooking_time\": \"30 minutes\",\n  \"error\":
+        \"\"\n}"}],"stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":393,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":122}}'
+  recorded_at: Sun, 19 Jan 2025 13:39:33 GMT
+recorded_with: VCR 6.3.1

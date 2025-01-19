@@ -1,18 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe Ai::Groq do
+RSpec.describe Ai::Claude do
   describe '#call' do
     let(:ingredients) { 'chicken, salt, pepper' }
     let(:prompt) { Recipes::Prompt.new(ingredients, false).call }
-    let(:groq) { described_class.new(prompt) }
+    let(:claude) { described_class.new(prompt) }
 
     context 'when given a valid prompt' do
       it 'returns a valid recipe structure' do
-        VCR.use_cassette('ai/groq/generates_recipe') do
-          result = groq.call
-          expect(result['name']).to eq('Grilled Chicken')
+        VCR.use_cassette('ai/claude/generates_recipe') do
+          result = claude.call
+          expect(result['name']).to eq('Chicken with Salt and Pepper')
           expect(result['ingredients']).to eq('chicken, salt, pepper')
-          expect(result['cooking_time']).to eq('20 minutes')
+          expect(result['cooking_time']).to eq('30 minutes')
           expect(result['error']).to eq('')
         end
       end
@@ -22,8 +22,8 @@ RSpec.describe Ai::Groq do
       let(:ingredients) { '' }  
       
       it 'returns an error message' do
-        VCR.use_cassette('ai/groq/failed_generates_recipe') do
-          result = groq.call
+        VCR.use_cassette('ai/claude/failed_generates_recipe') do
+          result = claude.call
           expect(result['error']).to eq('No ingredients provided')
         end
       end

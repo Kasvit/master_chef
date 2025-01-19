@@ -22,7 +22,9 @@ class Recipes::Generator
     case ai
     when "groq"
       Ai::Groq.new(prompt).call
-    else # TODO :claude and chatgpt
+    when "claude"
+      Ai::Claude.new(prompt).call
+    else # TODO :chatgpt
       { error: "AI not found" }
     end
   end
