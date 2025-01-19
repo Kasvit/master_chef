@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Ai::Groq do
   describe '#call' do
     let(:ingredients) { 'chicken, salt, pepper' }
-    let(:prompt) { Recipes::Prompt.new(ingredients).call }
+    let(:prompt) { Recipes::Prompt.new(ingredients, false).call }
     let(:client) { instance_double(Groq::Client) }
     let(:groq) { described_class.new(prompt) }
 

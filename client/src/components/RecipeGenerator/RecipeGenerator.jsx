@@ -10,10 +10,11 @@ function RecipeGenerator() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [ai, setAi] = useState(AIS[0]);
-  
+  const [softMode, setSoftMode] = useState(false);
+
   const generateRecipe = async () => {
     try {
-      const response = await generate(ingredients, ai);
+      const response = await generate(ingredients, ai, softMode);
       setRecipe(response.recipe);
     } catch (error) {
       setError(error.message);
@@ -54,8 +55,10 @@ function RecipeGenerator() {
         ingredients={ingredients} 
         ai={ai} 
         setIngredients={setIngredients} 
-        setAi={setAi} />
-      
+        setAi={setAi} 
+        softMode={softMode} 
+        setSoftMode={setSoftMode}
+      />
       {recipe && 
         <>
           <Recipe recipe={recipe} />

@@ -9,7 +9,7 @@ RSpec.describe Recipes::Generator do
 
       it 'returns a recipe' do
         allow(Ai::Groq).to receive(:new).and_return(double(call: { name: 'Chicken Dish', ingredients: ingredients, instructions: [], cooking_time: '30 minutes', error: nil }))
-        
+
         result = generator.call
         expect(result).to have_key(:name)
         expect(result).to have_key(:ingredients)
@@ -42,4 +42,4 @@ RSpec.describe Recipes::Generator do
       end
     end
   end
-end 
+end

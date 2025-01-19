@@ -7,7 +7,7 @@ class Api::V1::RecipesController < ApplicationController
     return render json: { recipe: { error: "invalid ingredients" } }, status: :unprocessable_entity unless validate_ingredients
     return render json: { recipe: { error: "invalid AI" } }, status: :unprocessable_entity unless validate_ai
 
-    recipe = Recipes::Generator.new(params[:ingredients], params[:ai]).call
+    recipe = Recipes::Generator.new(params[:ingredients], params[:ai], params[:soft_mode]).call
 
     render json: { recipe: recipe }
   end
@@ -24,6 +24,6 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def generate_params
-    params.require(:recipe).permit(:ingredients, :ai)
+    params.require(:recipe).permit(:ingredients, :ai, :soft_mode)
   end
 end

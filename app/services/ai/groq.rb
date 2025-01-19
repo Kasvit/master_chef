@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Ai::Groq < Ai::Base
-
   def call
     puts "Generating recipe with groq"
 
@@ -12,10 +11,10 @@ class Ai::Groq < Ai::Base
   private
 
   def client
-    @client ||= Groq::Client.new(api_key: ENV['GROQ_API_KEY'])
+    @client ||= Groq::Client.new(api_key: ENV["GROQ_API_KEY"])
   end
 
   def parsed_response(response)
-    JSON.parse(response['content'].gsub(/```json\n|```/, ''))
+    JSON.parse(response["content"].gsub(/```json\n|```/, ""))
   end
 end

@@ -8,7 +8,7 @@ class Site
   def settings
     {
       ais: %w[groq claude],
-      default_ai: 'groq',
+      default_ai: "groq",
       max_ingredients: 50
     }
   end
