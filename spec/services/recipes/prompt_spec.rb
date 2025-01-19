@@ -30,7 +30,7 @@ RSpec.describe Recipes::Prompt do
           Requirements:
           - Validate the ingredients. If the ingredients are not valid, return an error message in the error field.
           - Return the ingredients string with the ingredients.
-          - Return a valid JSON structure.
+          - Return ONLY a valid JSON structure without explanation, code, or other blocks and descriptions.
 
         PROMPT
 
@@ -66,7 +66,7 @@ RSpec.describe Recipes::Prompt do
           Requirements:
           - Validate the ingredients. If the ingredients are not valid, return an error message in the error field.
           - Return the ingredients string with the ingredients.
-          - Return a valid JSON structure.
+          - Return ONLY a valid JSON structure without explanation, code, or other blocks and descriptions.
 
         PROMPT
 

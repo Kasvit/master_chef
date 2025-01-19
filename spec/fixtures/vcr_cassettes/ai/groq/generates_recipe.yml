@@ -1,0 +1,96 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.groq.com/openai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"llama-3.1-70b-versatile","messages":[{"role":"user","content":"You
+        are a world-class chef and you are given a string of ingredients: chicken,
+        salt, pepper. You know how to cook with them.\nYou can''t use any other ingredients
+        than the ones you are given.\nYou must return a recipe in the format of the
+        following format <JSON>.\nExample of the structure:\n\n```json\n{\n  \"name\":
+        \"salad\",\n  \"ingredients\": \"lettuce, tomato, cucumber\",\n  \"instructions\":
+        [\n    { \n      \"step\":  \"prepare\", \n      \"description\": \"prepare
+        the ingredients\" \n    },\n    {\n      \"step\": \"chop the lettuce\",\n      \"description\":
+        \"chop the lettuce\"\n    },\n    {\n      \"step\": \"chop the tomato\",\n      \"description\":
+        \"chop the tomato\"\n    },\n    {\n      \"step\": \"chop the cucumber\",\n      \"description\":
+        \"chop the cucumber\"\n    },\n    {\n      \"step\": \"mix the ingredients\",\n      \"description\":
+        \"mix the ingredients\"\n    }\n  ],\n  \"cooking_time\": \"10 minutes\",\n  \"error\":
+        \"\"\n}\n```\n\nRecipe structure:\n- name: string\n- ingredients: string with
+        the same ingredients as the ones you are given\n- instructions: array of objects
+        with the following structure:\n  - step: string\n  - description: string\n-
+        cooking_time: string\n- error: string\n\n\nRequirements:\n- Validate the ingredients.
+        If the ingredients are not valid, return an error message in the error field.\n-
+        Return the ingredients string with the ingredients.\n- Return ONLY a valid
+        JSON structure without explanation, code, or other blocks and descriptions.\n\n"}],"max_tokens":1024,"temperature":1}'
+    headers:
+      Authorization:
+      - Bearer <GROQ_API_KEY>
+      User-Agent:
+      - groq-ruby/0.3.2
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sun, 19 Jan 2025 09:19:32 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cf-Ray:
+      - 9045be5edaba77b6-KBP
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cache-Control:
+      - private, max-age=0, no-store, no-cache, must-revalidate
+      Vary:
+      - Origin, Accept-Encoding
+      X-Groq-Region:
+      - me-central-1
+      X-Ratelimit-Limit-Requests:
+      - '14400'
+      X-Ratelimit-Limit-Tokens:
+      - '6000'
+      X-Ratelimit-Remaining-Requests:
+      - '14399'
+      X-Ratelimit-Remaining-Tokens:
+      - '5643'
+      X-Ratelimit-Reset-Requests:
+      - 6s
+      X-Ratelimit-Reset-Tokens:
+      - 3.57s
+      X-Request-Id:
+      - req_01jhyxrdzwetebcj6e08yncn9q
+      Set-Cookie:
+      - __cf_bm=7VEcuJQTTEbJT6Fk7.MihLjuzeBw8jhg0LViEGgb.lE-1737278372-1.0.1.1-KCSwurglhUwuc8EybtzoIbTaEifXH0CvDRbBhxip4BMmNF4TDo7hUKSkqJDYxvHeQ_xBX35UfT_s90jhiA8jfg;
+        path=/; expires=Sun, 19-Jan-25 09:49:32 GMT; domain=.groq.com; HttpOnly; Secure;
+        SameSite=None
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"chatcmpl-f5f1c057-dc7f-4217-bab0-4cee9cb7cf48","object":"chat.completion","created":1737278371,"model":"llama-3.1-70b-versatile","choices":[{"index":0,"message":{"role":"assistant","content":"```json\n{\n  \"name\":
+        \"Grilled Chicken\",\n  \"ingredients\": \"chicken, salt, pepper\",\n  \"instructions\":
+        [\n    { \n      \"step\": \"preheat\", \n      \"description\": \"preheat
+        the grill\" \n    },\n    {\n      \"step\": \"season the chicken\",\n      \"description\":
+        \"season the chicken with salt and pepper\"\n    },\n    {\n      \"step\":
+        \"grill the chicken\",\n      \"description\": \"grill the chicken until it''s
+        cooked through\"\n    }\n  ],\n  \"cooking_time\": \"20 minutes\",\n  \"error\":
+        \"\"\n}\n```"},"logprobs":null,"finish_reason":"stop"}],"usage":{"queue_time":0.004927720999999996,"prompt_tokens":366,"prompt_time":0.042163849,"completion_tokens":130,"completion_time":0.472727273,"total_tokens":496,"total_time":0.514891122},"system_fingerprint":"fp_2f487c4013","x_groq":{"id":"req_01jhyxrdzwetebcj6e08yncn9q"}}
+
+        '
+  recorded_at: Sun, 19 Jan 2025 09:19:31 GMT
+recorded_with: VCR 6.3.1

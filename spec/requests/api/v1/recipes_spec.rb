@@ -7,7 +7,7 @@ RSpec.describe "Api::V1::Recipes", type: :request do
         {
           recipe: {
             ingredients: 'chicken, salt, pepper',
-            ai: 'grog'
+            ai: 'groq'
           }
         }
       end
@@ -24,7 +24,7 @@ RSpec.describe "Api::V1::Recipes", type: :request do
         {
           recipe: {
             ingredients: 'sal',
-            ai: 'grog'
+            ai: 'groq'
           }
         }
       end

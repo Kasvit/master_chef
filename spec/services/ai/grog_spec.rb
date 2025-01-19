@@ -1,37 +1,27 @@
 require 'rails_helper'
 
-RSpec.describe Ai::Grog do
+RSpec.describe Ai::Groq do
   describe '#call' do
-    let(:prompt) { 'You are a world-class chef...' }
-    let(:grog) { described_class.new(prompt) }
+    let(:ingredients) { 'chicken, salt, pepper' }
+    let(:prompt) { Recipes::Prompt.new(ingredients).call }
+    let(:client) { instance_double(Groq::Client) }
+    let(:groq) { described_class.new(prompt) }
 
     context 'when given a valid prompt' do
       it 'returns a valid recipe structure' do
-        allow(grog).to receive(:call).and_return({
-          name: 'Chicken Dish',
-          ingredients: [ 'chicken', 'salt', 'pepper' ],
-          instructions: [ { step: '1', description: 'Cook the chicken.' } ],
-          cooking_time: '30 minutes',
-          error: nil
-        })
-
-        result = grog.call
-        expect(result).to have_key(:name)
-        expect(result[:name]).to eq('Chicken Dish')
-        expect(result).to have_key(:ingredients)
-        expect(result[:ingredients]).to include('chicken')
-        expect(result).to have_key(:instructions)
-        expect(result[:instructions]).to be_an(Array)
-        expect(result).to have_key(:cooking_time)
-        expect(result[:cooking_time]).to eq('30 minutes')
-        expect(result).to have_key(:error)
-        expect(result[:error]).to be_nil
+        VCR.use_cassette('ai/groq/generates_recipe') do
+          result = groq.call
+          expect(result['name']).to eq('Grilled Chicken')
+          expect(result['ingredients']).to eq('chicken, salt, pepper')
+          expect(result['cooking_time']).to eq('20 minutes')
+          expect(result['error']).to eq('')
+        end
       end
     end
 
     context 'when the prompt is invalid' do
       it 'returns an error message' do
-        allow(grog).to receive(:call).and_return({
+        allow(groq).to receive(:call).and_return({
           name: nil,
           ingredients: [],
           instructions: [],
@@ -39,7 +29,7 @@ RSpec.describe Ai::Grog do
           error: 'Invalid prompt'
         })
 
-        result = grog.call
+        result = groq.call
         expect(result).to have_key(:error)
         expect(result[:error]).to eq('Invalid prompt')
       end

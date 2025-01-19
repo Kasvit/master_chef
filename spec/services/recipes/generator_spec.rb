@@ -4,12 +4,12 @@ RSpec.describe Recipes::Generator do
   describe '#call' do
     context 'with valid ingredients' do
       let(:ingredients) { 'chicken, salt, pepper' }
-      let(:ai) { 'grog' }
+      let(:ai) { 'groq' }
       let(:generator) { described_class.new(ingredients, ai) }
 
       it 'returns a recipe' do
-        allow(Ai::Grog).to receive(:new).and_return(double(call: { name: 'Chicken Dish', ingredients: ingredients, instructions: [], cooking_time: '30 minutes', error: nil }))
-
+        allow(Ai::Groq).to receive(:new).and_return(double(call: { name: 'Chicken Dish', ingredients: ingredients, instructions: [], cooking_time: '30 minutes', error: nil }))
+        
         result = generator.call
         expect(result).to have_key(:name)
         expect(result).to have_key(:ingredients)
@@ -22,7 +22,7 @@ RSpec.describe Recipes::Generator do
 
     context 'with invalid ingredients' do
       let(:ingredients) { 'sal' }
-      let(:ai) { 'grog' }
+      let(:ai) { 'groq' }
       let(:generator) { described_class.new(ingredients, ai) }
 
       it 'returns an error message' do
@@ -42,4 +42,4 @@ RSpec.describe Recipes::Generator do
       end
     end
   end
-end
+end 

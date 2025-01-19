@@ -43,3 +43,13 @@ This application allows users to input ingredients and receive a recipe generate
 ## Contributing
 
 If you would like to contribute to the project, please create a new pull request.
+
+### TODO:
+- [ ] Add AI clients
+- [ ] Config foreman
+- [ ] Add a checkbox on UI to allow the AI to use additional ingredients Feel free to use any other ingredients that you can find in your kitchen.
+- [ ] Add tailwind, update styles
+- [ ] Add CI
+- [ ] Add swagger documentation
+- [ ] Add storybooks https://storybook.js.org/docs/get-started/frameworks/react-vite
+- [ ] Deploy

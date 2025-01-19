@@ -10,4 +10,8 @@ class Ai::Base
   def call
     raise "Not implemented"
   end
+
+  private
+
+  attr_reader :client
 end

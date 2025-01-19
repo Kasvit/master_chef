@@ -67,3 +67,4 @@ group :development do
 end
 
 gem "rails_rate_limit", "~> 0.1.0" # my own gem
+gem 'groq'

@@ -7,8 +7,9 @@ class Site
 
   def settings
     {
-      ais: %w[grog claude],
-      default_ai: "grog"
+      ais: %w[groq claude],
+      default_ai: 'groq',
+      max_ingredients: 50
     }
   end
 end

@@ -16,7 +16,7 @@ class Api::V1::RecipesController < ApplicationController
 
   def validate_ingredients
     ingredients = generate_params[:ingredients]
-    ingredients.present? && ingredients.length > 3 && ingredients.length <= 30
+    ingredients.present? && ingredients.length > 3 && ingredients.length <= Site.current.settings[:max_ingredients]
   end
 
   def validate_ai

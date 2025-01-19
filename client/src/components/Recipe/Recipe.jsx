@@ -16,7 +16,7 @@ function Recipe({ recipe }) {
       <p><strong>Cooking Time:</strong> {recipe.cooking_time}</p>
       <p><strong>Ingredients:</strong></p>
       <ul>
-        {recipe.ingredients.map((ingredient, index) => (
+        {recipe.ingredients.split(', ').map((ingredient, index) => (
           <li key={index}>{ingredient}</li>
         ))}
       </ul>
@@ -25,7 +25,10 @@ function Recipe({ recipe }) {
           <p><strong>Instructions:</strong></p>
           <ol>
             {recipe.instructions.map((instruction, index) => (
-              <li key={index}>{instruction}</li>
+              <li key={index}>
+                <strong>Step {index + 1}:</strong> {instruction.step}
+                <p>{instruction.description}</p>
+              </li>
             ))}
           </ol>
         </>
@@ -39,8 +42,11 @@ Recipe.propTypes = {
   recipe: PropTypes.shape({
     name: PropTypes.string.isRequired,
     cooking_time: PropTypes.string.isRequired,
-    ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
-    instructions: PropTypes.arrayOf(PropTypes.string).isRequired,
+    ingredients: PropTypes.string.isRequired,
+    instructions: PropTypes.arrayOf(PropTypes.shape({
+      step: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    })).isRequired,
     error: PropTypes.string,
   })
 };
