@@ -55,3 +55,7 @@ jobs:
         run: |
           bundle install
           bundle exec rspec
+        env:
+          RAILS_ENV: test
+          ANTHROPIC_API_KEY: dummy_key
+          GROQ_API_KEY: dummy_key
