@@ -17,28 +17,36 @@ This application allows users to input ingredients and receive a recipe generate
 3. Install dependencies:
    ```bash
    bundle install
+   rake db:create
    npm install
+   cd client && npm install
    ```
 
 ## Usage
 
-1. Start the application:
+1. Create a `.env` file in the root directory.
+
+2. Start the application:
    ```bash
+   # Option 1: Run servers separately
    bundle exec rails s
    cd client && npm run dev
+   
+   # Option 2: Run both servers with foreman
+   foreman start -f Procfile.dev
    ```
 
-2. Open your browser and go to `http://localhost:5173`.
+3. Open your browser and go to `http://localhost:5173`.
 
-3. Enter your ingredients in the provided field.
+4. Enter your ingredients in the provided field.
 
-4. Click the button to receive a recipe.
+5. Click the button to receive a recipe.
 
 ## Technologies
 
 - Ruby on Rails
 - React
-- For recipe generation: OpenAI API
+- For recipe generation: OpenAI API, Claude API, Groq API
 
 ## Contributing
 
@@ -46,10 +54,11 @@ If you would like to contribute to the project, please create a new pull request
 
 ### TODO:
 - [ ] Add AI clients
-- [ ] Config foreman
+- [x] Config foreman
 - [x] Add a checkbox on UI to allow the AI to use additional ingredients Feel free to use any other ingredients that you can find in your kitchen.
 - [x] Add tailwind, update styles
-- [ ] Add CI
+- [x] Add CI
+- [ ] Validate the generated recipe
 - [ ] Add swagger documentation
 - [ ] Add storybooks https://storybook.js.org/docs/get-started/frameworks/react-vite
 - [ ] Deploy
