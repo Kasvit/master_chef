@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Ai::Groq do
   describe '#call' do
-    let(:ingredients) { 'chicken, salt, pepper' }
-    let(:prompt) { Recipes::Prompt.new(ingredients: ingredients, soft_mode: false).for_generate }
+    let(:recipe) { build(:recipe, ingredients: 'chicken, salt, pepper', soft_mode: false) }
+    let(:prompt) { Recipes::Prompt.new(recipe: recipe).for_generate }
     let(:groq) { described_class.new(prompt) }
 
     context 'when given a valid prompt' do

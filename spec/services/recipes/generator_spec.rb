@@ -4,7 +4,7 @@ RSpec.describe Recipes::Generator do
   describe '#call' do
     context 'with valid ingredients' do
       let(:recipe) { build(:recipe, ingredients: 'chicken, salt, pepper', ai: 'groq') }
-      let(:generator) { described_class.new(recipe) }
+      let(:generator) { described_class.new(recipe: recipe) }
 
       VCR.use_cassette('ai/groq/generates_recipe', record: :new_episodes) do
         it 'returns a recipe' do
@@ -23,7 +23,7 @@ RSpec.describe Recipes::Generator do
 
     context 'with invalid ingredients' do
       let(:recipe) { build(:recipe, ingredients: '', ai: 'groq') }
-      let(:generator) { described_class.new(recipe) }
+      let(:generator) { described_class.new(recipe: recipe) }
 
       VCR.use_cassette('ai/groq/failed_generates_recipe') do
         it 'returns an error message' do
@@ -35,7 +35,7 @@ RSpec.describe Recipes::Generator do
 
     context 'with an unknown AI' do
       let(:recipe) { build(:recipe, ingredients: 'chicken, salt, pepper', ai: 'unknown_ai') }
-      let(:generator) { described_class.new(recipe) }
+      let(:generator) { described_class.new(recipe: recipe) }
 
       it 'returns an error message for unknown AI' do
         result = generator.call

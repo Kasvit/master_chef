@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Recipes::Prompt do
   describe '#call' do
     context 'with valid ingredients' do
-      let(:ingredients) { 'chicken, salt, pepper' }
-      let(:prompt) { described_class.new(ingredients: ingredients, soft_mode: false) }
+      let(:recipe) { build(:recipe, ingredients: 'chicken, salt, pepper', soft_mode: false) }
+      let(:prompt) { described_class.new(recipe: recipe) }
 
       it 'generates a valid prompt' do
         expected_prompt = <<~PROMPT
@@ -12,7 +12,7 @@ RSpec.describe Recipes::Prompt do
 
           You will be given a string of ingredients:
           <ingredients>
-          "#{ingredients}"
+          "#{recipe.ingredients}"
           </ingredients>
 
           You can't use any other ingredients than the ones you are given.
@@ -70,8 +70,8 @@ RSpec.describe Recipes::Prompt do
     end
 
     context 'with soft mode' do
-      let(:ingredients) { 'chicken, salt, pepper' }
-      let(:prompt) { described_class.new(ingredients: ingredients, soft_mode: true) }
+      let(:recipe) { build(:recipe, ingredients: 'chicken, salt, pepper', soft_mode: true) }
+      let(:prompt) { described_class.new(recipe: recipe) }
 
       it 'generates a valid prompt' do
         expected_prompt = <<~PROMPT
@@ -79,7 +79,7 @@ RSpec.describe Recipes::Prompt do
 
           You will be given a string of ingredients:
           <ingredients>
-          "#{ingredients}"
+          "#{recipe.ingredients}"
           </ingredients>
 
           Feel free to use any other ingredients that you can find in your kitchen.

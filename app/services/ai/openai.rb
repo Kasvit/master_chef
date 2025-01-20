@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Ai::Openai < Ai::Base
+  NAME = "openai".freeze
+
   def call
     response = client.chat(
       parameters: {

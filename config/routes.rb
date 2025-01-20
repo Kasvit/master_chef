@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :recipes, only: [] do
         collection do
           post :generate
+          post :validate
         end
       end
     end

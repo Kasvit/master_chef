@@ -1,11 +1,10 @@
 class Recipes::Prompt
-  attr_reader :ingredients, :soft_mode
+  attr_reader :recipe
 
   FILE = File.read("./app/services/recipes/recipe_template.json")
 
-  def initialize(ingredients:, soft_mode:)
-    @ingredients = ingredients
-    @soft_mode = soft_mode
+  def initialize(recipe: nil)
+    @recipe = recipe
   end
 
   def for_generate
@@ -14,10 +13,10 @@ class Recipes::Prompt
 
     You will be given a string of ingredients:
     <ingredients>
-    "#{ingredients}"
+    "#{recipe.ingredients}"
     </ingredients>
 
-    #{if soft_mode
+    #{if recipe.soft_mode
       "Feel free to use any other ingredients that you can find in your kitchen."
       else
       "You can't use any other ingredients than the ones you are given."
@@ -42,7 +41,7 @@ class Recipes::Prompt
     Requirements:
     1. Validate the ingredients. If the ingredients are not valid or recognizable, return an error message in the "error" field.
     2. Include ALL used ingredients in the "ingredients" field.
-    #{if soft_mode
+    #{if recipe.soft_mode
       "If you use additional ingredients, include them in the 'ingredients' field."
       else
       "You can't use any other ingredients than the ones you are given."
@@ -71,6 +70,58 @@ class Recipes::Prompt
     6. Estimate how long it would take to prepare and cook the dish, and set this as the "cooking_time" value. Include the unit of time (e.g., "30 minutes" or "2 hours").
 
     7. Ensure that your output is a valid JSON structure and contains only the specified fields.
+
+    Remember to return ONLY the JSON structure without any additional text or explanations.
+  PROMPT
+  end
+
+  def for_validate
+    <<~PROMPT
+    You are a world-class chef. Your goal is to validate the uploaded recipe and return the recipe in a specific JSON format.
+
+    You will be given a JSON object with the recipe fields:
+    <recipe>
+    #{recipe.as_json.slice('name', 'ingredients', 'instructions', 'cooking_time', 'error')}
+    </recipe>
+
+    The recipe response should be returned in the following JSON format:
+    ```json
+    {
+      "name": "dish name",
+      "ingredients": "comma-separated list of ingredients",
+      "instructions": [
+        {
+          "step": "step name",
+          "description": "step description"
+        }
+      ],
+      "cooking_time": "cooking time in minutes",
+      "error": ""
+    }
+    ```
+
+    Requirements:
+    1. Validate the recipe. If the recipe is not valid, return an error message in the "error" field.
+    2. Return ONLY a valid JSON structure without any additional explanation, code blocks, or descriptions.
+
+    Example of the response:
+    ```json
+    #{FILE}
+    ```
+
+    To complete this task:
+
+    1. First, examine the given recipe carefully. If it is not valid, set the "error" field to "Invalid recipe provided" and leave the other fields empty.
+
+    2. If the ingredients are valid and can be used to make this dish, return the same ingredients in the "ingredients" field.
+
+    3. Check if the name is valid and can be used to name this dish, set it as the "name" value.
+
+    4. Check if the instructions are valid and can be used to prepare this dish, set them as the "instructions" field.
+
+    5. Check if the cooking time is valid and can be used to prepare this dish, set it as the "cooking_time" value.
+
+    6. Ensure that your output is a valid JSON structure and contains only the specified fields.
 
     Remember to return ONLY the JSON structure without any additional text or explanations.
   PROMPT

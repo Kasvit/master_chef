@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Ai::Claude < Ai::Base
+  NAME = "claude".freeze
+
   def call
     response = client.messages(
       parameters: {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AIS } from "../../constants";
-import { generate } from "../../services/recipe";
+import { generate, validate } from "../../services/recipe";
 import Recipe from "../Recipe/Recipe";
 import RecipeGeneratorForm from "../RecipeGeneratorForm/RecipeGeneratorForm";
 
@@ -23,6 +23,17 @@ function RecipeGenerator() {
     }
   };
 
+  const validateRecipe = async () => {
+    try {
+      const response = await validate(recipe, ai, softMode);
+      setRecipe(response.recipe);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
@@ -33,6 +44,11 @@ function RecipeGenerator() {
     setError(null);
     setRecipe(null);
     setLoading(false);
+  };
+
+  const handleValidate = () => {
+    setLoading(true);
+    validateRecipe();
   };
 
   if (loading) {
@@ -71,12 +87,18 @@ function RecipeGenerator() {
       {recipe && (
         <div className="space-y-6">
           <Recipe recipe={recipe} />
-          <div className="text-center">
+          <div className="text-center flex justify-around">
             <button 
               onClick={handleRefresh}
               className="bg-gray-200 text-gray-800 py-2 px-6 rounded-lg hover:bg-gray-300 transition-colors duration-200"
             >
               Start Over
+            </button>
+            <button 
+              onClick={handleValidate}
+              className="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+            >
+              Validate
             </button>
           </div>
         </div>
