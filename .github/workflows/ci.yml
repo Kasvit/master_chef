@@ -70,6 +70,13 @@ jobs:
         run: |
           cp config/database.yml.github-actions config/database.yml
           bundle exec rake db:create db:schema:load
+        env:
+          RAILS_ENV: test
+          ANTHROPIC_API_KEY: dummy_key
+          GROQ_API_KEY: dummy_key
+          POSTGRES_HOST: localhost
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
 
       - name: Run specs
         run: |
