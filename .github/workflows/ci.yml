@@ -1,9 +1,11 @@
 name: CI
 
 on:
-  pull_request:
   push:
-    branches: [ main ]
+    branches:
+      - master
+
+  pull_request:
 
 jobs:
   scan_ruby:
@@ -37,3 +39,53 @@ jobs:
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
+  rspec:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: master_chef_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Setup Database
+        run: |
+          cp config/database.yml.github-actions config/database.yml
+          bundle exec rails db:drop db:create db:migrate
+        env:
+          RAILS_ENV: test
+          ANTHROPIC_API_KEY: dummy_key
+          GROQ_API_KEY: dummy_key
+          POSTGRES_HOST: localhost
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+
+      - name: Run specs
+        run: |
+          bundle install
+          bundle exec rspec
+        env:
+          RAILS_ENV: test
+          ANTHROPIC_API_KEY: dummy_key
+          GROQ_API_KEY: dummy_key
+          POSTGRES_HOST: localhost
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres

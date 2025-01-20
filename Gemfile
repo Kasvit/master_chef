@@ -64,6 +64,7 @@ group :development do
   gem "ruby-lsp-rails"
   gem "ruby-lsp-rspec"
   gem "standard"
+  gem "foreman"
 end
 
 gem "rails_rate_limit", "~> 0.1.0" # my own gem
