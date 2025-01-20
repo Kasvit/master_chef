@@ -1,0 +1,114 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-4o-mini","messages":[{"role":"user","content":"You are
+        a world-class chef tasked with creating a recipe using a given set of ingredients.
+        Your goal is to create a delicious dish and present the recipe in a specific
+        JSON format.\n\nYou will be given a string of ingredients:\n\u003cingredients\u003e\n\"chicken,
+        salt, pepper\"\n\u003c/ingredients\u003e\n\nYou can''t use any other ingredients
+        than the ones you are given.\n\nThe recipe should be returned in the following
+        JSON format:\n```json\n{\n  \"name\": \"dish name\",\n  \"ingredients\": \"comma-separated
+        list of ingredients\",\n  \"instructions\": [\n    {\n      \"step\": \"step
+        name\",\n      \"description\": \"step description\"\n    }\n  ],\n  \"cooking_time\":
+        \"cooking time in minutes\",\n  \"error\": \"\"\n}\n```\n\nRequirements:\n1.
+        Validate the ingredients. If the ingredients are not valid or recognizable,
+        return an error message in the \"error\" field.\n2. Include ALL used ingredients
+        in the \"ingredients\" field.\nYou can''t use any other ingredients than the
+        ones you are given.\n3. Provide clear and concise instructions in the \"instructions\"
+        array.\n4. Estimate a reasonable cooking time for the dish.\n5. Return ONLY
+        a valid JSON structure without any additional explanation, code blocks, or
+        descriptions.\n\nExample of the response:\n```json\n{\n  \"name\": \"salad\",\n  \"ingredients\":
+        \"lettuce, tomato, cucumber\",\n  \"instructions\": [\n    { \n      \"step\":  \"prepare\",
+        \n      \"description\": \"prepare the ingredients\" \n    },\n    {\n      \"step\":
+        \"chop the lettuce\",\n      \"description\": \"chop the lettuce\"\n    },\n    {\n      \"step\":
+        \"chop the tomato\",\n      \"description\": \"chop the tomato\"\n    },\n    {\n      \"step\":
+        \"chop the cucumber\",\n      \"description\": \"chop the cucumber\"\n    },\n    {\n      \"step\":
+        \"mix the ingredients\",\n      \"description\": \"mix the ingredients\"\n    }\n  ],\n  \"cooking_time\":
+        \"10 minutes\",\n  \"error\": \"\"\n}\n```\n\nTo complete this task:\n\n1.
+        First, examine the given ingredients carefully. If they are not recognizable
+        as food items or are nonsensical, set the \"error\" field to \"Invalid ingredients
+        provided\" and leave the other fields empty.\n\n2. If the ingredients are
+        valid, create a recipe that incorporates them along with other common ingredients.
+        Be creative but realistic in your dish creation.\n\n3. Choose an appropriate
+        name for your dish and set it as the \"name\" value.\n\n4. List ALL ingredients
+        used in the \"ingredients\" field, separated by commas.\n\n5. Create a series
+        of clear, step-by-step instructions for preparing the dish. Each step should
+        be an object in the \"instructions\" array with a \"step\" (brief title) and
+        \"description\" (more detailed explanation).\n\n6. Estimate how long it would
+        take to prepare and cook the dish, and set this as the \"cooking_time\" value.
+        Include the unit of time (e.g., \"30 minutes\" or \"2 hours\").\n\n7. Ensure
+        that your output is a valid JSON structure and contains only the specified
+        fields.\n\nRemember to return ONLY the JSON structure without any additional
+        text or explanations.\n"}],"temperature":0.7}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <OPENAI_ACCESS_TOKEN>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 20 Jan 2025 14:04:08 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Expose-Headers:
+      - X-Request-ID
+      Openai-Organization:
+      - home-ozxyyg
+      Openai-Processing-Ms:
+      - '4337'
+      Openai-Version:
+      - '2020-10-01'
+      X-Ratelimit-Limit-Requests:
+      - '10000'
+      X-Ratelimit-Limit-Tokens:
+      - '200000'
+      X-Ratelimit-Remaining-Requests:
+      - '9999'
+      X-Ratelimit-Remaining-Tokens:
+      - '199262'
+      X-Ratelimit-Reset-Requests:
+      - 8.64s
+      X-Ratelimit-Reset-Tokens:
+      - 221ms
+      X-Request-Id:
+      - req_f4f12e5809218b0b45634f1f7afe6b92
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=z2eEH6eBZe1x_Fn_7eT02bbutlmRiDLQim4G2uKfQyo-1737381848-1.0.1.1-hG6mzTVjHpG_364NlHKeq4.4NXS4xDhrWkVyMKdQ1qRZ4D92kul6noIAIK133F_sEYEbmC3BHRslTA7aj8LYTg;
+        path=/; expires=Mon, 20-Jan-25 14:34:08 GMT; domain=.api.openai.com; HttpOnly;
+        Secure; SameSite=None
+      - _cfuvid=dPjN8byyh6qSUssIaShD30GcZE7ZK8xE6n9w1oBf__A-1737381848417-0.0.1.1-604800000;
+        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 904f9c8c0cdf77af-KBP
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJjaGF0Y21wbC1Bcm1ma3JjTmFWUEZVTWdqeW1hZDdMaXZhZlFESyIsCiAgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24iLAogICJjcmVhdGVkIjogMTczNzM4MTg0NCwKICAibW9kZWwiOiAiZ3B0LTRvLW1pbmktMjAyNC0wNy0xOCIsCiAgImNob2ljZXMiOiBbCiAgICB7CiAgICAgICJpbmRleCI6IDAsCiAgICAgICJtZXNzYWdlIjogewogICAgICAgICJyb2xlIjogImFzc2lzdGFudCIsCiAgICAgICAgImNvbnRlbnQiOiAiYGBganNvblxue1xuICBcIm5hbWVcIjogXCJTZWFzb25lZCBDaGlja2VuXCIsXG4gIFwiaW5ncmVkaWVudHNcIjogXCJjaGlja2VuLCBzYWx0LCBwZXBwZXJcIixcbiAgXCJpbnN0cnVjdGlvbnNcIjogW1xuICAgIHtcbiAgICAgIFwic3RlcFwiOiBcInByZXBhcmUgY2hpY2tlblwiLFxuICAgICAgXCJkZXNjcmlwdGlvblwiOiBcIlRha2UgdGhlIGNoaWNrZW4gYW5kIHBhdCBpdCBkcnkgd2l0aCBhIHBhcGVyIHRvd2VsLlwiXG4gICAgfSxcbiAgICB7XG4gICAgICBcInN0ZXBcIjogXCJzZWFzb24gY2hpY2tlblwiLFxuICAgICAgXCJkZXNjcmlwdGlvblwiOiBcIlNwcmlua2xlIHNhbHQgYW5kIHBlcHBlciBldmVubHkgb3ZlciB0aGUgY2hpY2tlbiBvbiBib3RoIHNpZGVzLlwiXG4gICAgfSxcbiAgICB7XG4gICAgICBcInN0ZXBcIjogXCJjb29rIGNoaWNrZW5cIixcbiAgICAgIFwiZGVzY3JpcHRpb25cIjogXCJIZWF0IGEgc2tpbGxldCBvdmVyIG1lZGl1bSBoZWF0IGFuZCBhZGQgdGhlIHNlYXNvbmVkIGNoaWNrZW4uIENvb2sgZm9yIGFib3V0IDYtNyBtaW51dGVzIG9uIGVhY2ggc2lkZSwgdW50aWwgZnVsbHkgY29va2VkLlwiXG4gICAgfSxcbiAgICB7XG4gICAgICBcInN0ZXBcIjogXCJjaGVjayBkb25lbmVzc1wiLFxuICAgICAgXCJkZXNjcmlwdGlvblwiOiBcIkVuc3VyZSB0aGUgaW50ZXJuYWwgdGVtcGVyYXR1cmUgb2YgdGhlIGNoaWNrZW4gcmVhY2hlcyAxNjXCsEYgKDc1wrBDKS5cIlxuICAgIH0sXG4gICAge1xuICAgICAgXCJzdGVwXCI6IFwic2VydmVcIixcbiAgICAgIFwiZGVzY3JpcHRpb25cIjogXCJSZW1vdmUgdGhlIGNoaWNrZW4gZnJvbSB0aGUgc2tpbGxldCBhbmQgbGV0IGl0IHJlc3QgZm9yIGEgZmV3IG1pbnV0ZXMgYmVmb3JlIHNsaWNpbmcgYW5kIHNlcnZpbmcuXCJcbiAgICB9XG4gIF0sXG4gIFwiY29va2luZ190aW1lXCI6IFwiMjAgbWludXRlc1wiLFxuICBcImVycm9yXCI6IFwiXCJcbn1cbmBgYCIsCiAgICAgICAgInJlZnVzYWwiOiBudWxsCiAgICAgIH0sCiAgICAgICJsb2dwcm9icyI6IG51bGwsCiAgICAgICJmaW5pc2hfcmVhc29uIjogInN0b3AiCiAgICB9CiAgXSwKICAidXNhZ2UiOiB7CiAgICAicHJvbXB0X3Rva2VucyI6IDY2OCwKICAgICJjb21wbGV0aW9uX3Rva2VucyI6IDIyMywKICAgICJ0b3RhbF90b2tlbnMiOiA4OTEsCiAgICAicHJvbXB0X3Rva2Vuc19kZXRhaWxzIjogewogICAgICAiY2FjaGVkX3Rva2VucyI6IDAsCiAgICAgICJhdWRpb190b2tlbnMiOiAwCiAgICB9LAogICAgImNvbXBsZXRpb25fdG9rZW5zX2RldGFpbHMiOiB7CiAgICAgICJyZWFzb25pbmdfdG9rZW5zIjogMCwKICAgICAgImF1ZGlvX3Rva2VucyI6IDAsCiAgICAgICJhY2NlcHRlZF9wcmVkaWN0aW9uX3Rva2VucyI6IDAsCiAgICAgICJyZWplY3RlZF9wcmVkaWN0aW9uX3Rva2VucyI6IDAKICAgIH0KICB9LAogICJzZXJ2aWNlX3RpZXIiOiAiZGVmYXVsdCIsCiAgInN5c3RlbV9maW5nZXJwcmludCI6ICJmcF9iZDgzMzI5ZjYzIgp9Cg==
+  recorded_at: Mon, 20 Jan 2025 14:04:08 GMT
+recorded_with: VCR 6.3.1

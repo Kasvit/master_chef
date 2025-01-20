@@ -18,7 +18,7 @@ RSpec.describe Site, type: :model do
     it 'returns the correct settings' do
       site = Site.new
       expect(site.settings).to eq({
-        ais: %w[groq claude],
+        ais: %w[groq claude openai],
         default_ai: 'groq',
         max_ingredients: 50
       })

@@ -1,0 +1,147 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-4o-mini","messages":[{"role":"user","content":"You are
+        a world-class chef tasked with creating a recipe using a given set of ingredients.
+        Your goal is to create a delicious dish and present the recipe in a specific
+        JSON format.\n\nYou will be given a string of ingredients:\n\u003cingredients\u003e\n\"\"\n\u003c/ingredients\u003e\n\nYou
+        can''t use any other ingredients than the ones you are given.\n\nThe recipe
+        should be returned in the following JSON format:\n```json\n{\n  \"name\":
+        \"dish name\",\n  \"ingredients\": \"comma-separated list of ingredients\",\n  \"instructions\":
+        [\n    {\n      \"step\": \"step name\",\n      \"description\": \"step description\"\n    }\n  ],\n  \"cooking_time\":
+        \"cooking time in minutes\",\n  \"error\": \"\"\n}\n```\n\nRequirements:\n1.
+        Validate the ingredients. If the ingredients are not valid or recognizable,
+        return an error message in the \"error\" field.\n2. Include ALL used ingredients
+        in the \"ingredients\" field.\nYou can''t use any other ingredients than the
+        ones you are given.\n3. Provide clear and concise instructions in the \"instructions\"
+        array.\n4. Estimate a reasonable cooking time for the dish.\n5. Return ONLY
+        a valid JSON structure without any additional explanation, code blocks, or
+        descriptions.\n\nExample of the response:\n```json\n{\n  \"name\": \"salad\",\n  \"ingredients\":
+        \"lettuce, tomato, cucumber\",\n  \"instructions\": [\n    { \n      \"step\":  \"prepare\",
+        \n      \"description\": \"prepare the ingredients\" \n    },\n    {\n      \"step\":
+        \"chop the lettuce\",\n      \"description\": \"chop the lettuce\"\n    },\n    {\n      \"step\":
+        \"chop the tomato\",\n      \"description\": \"chop the tomato\"\n    },\n    {\n      \"step\":
+        \"chop the cucumber\",\n      \"description\": \"chop the cucumber\"\n    },\n    {\n      \"step\":
+        \"mix the ingredients\",\n      \"description\": \"mix the ingredients\"\n    }\n  ],\n  \"cooking_time\":
+        \"10 minutes\",\n  \"error\": \"\"\n}\n```\n\nTo complete this task:\n\n1.
+        First, examine the given ingredients carefully. If they are not recognizable
+        as food items or are nonsensical, set the \"error\" field to \"Invalid ingredients
+        provided\" and leave the other fields empty.\n\n2. If the ingredients are
+        valid, create a recipe that incorporates them along with other common ingredients.
+        Be creative but realistic in your dish creation.\n\n3. Choose an appropriate
+        name for your dish and set it as the \"name\" value.\n\n4. List ALL ingredients
+        used in the \"ingredients\" field, separated by commas.\n\n5. Create a series
+        of clear, step-by-step instructions for preparing the dish. Each step should
+        be an object in the \"instructions\" array with a \"step\" (brief title) and
+        \"description\" (more detailed explanation).\n\n6. Estimate how long it would
+        take to prepare and cook the dish, and set this as the \"cooking_time\" value.
+        Include the unit of time (e.g., \"30 minutes\" or \"2 hours\").\n\n7. Ensure
+        that your output is a valid JSON structure and contains only the specified
+        fields.\n\nRemember to return ONLY the JSON structure without any additional
+        text or explanations.\n"}],"temperature":0.7}'
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer <OPENAI_ACCESS_TOKEN>
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 20 Jan 2025 14:04:09 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Access-Control-Expose-Headers:
+      - X-Request-ID
+      Openai-Organization:
+      - home-ozxyyg
+      Openai-Processing-Ms:
+      - '1027'
+      Openai-Version:
+      - '2020-10-01'
+      X-Ratelimit-Limit-Requests:
+      - '10000'
+      X-Ratelimit-Limit-Tokens:
+      - '200000'
+      X-Ratelimit-Remaining-Requests:
+      - '9998'
+      X-Ratelimit-Remaining-Tokens:
+      - '199267'
+      X-Ratelimit-Reset-Requests:
+      - 12.596s
+      X-Ratelimit-Reset-Tokens:
+      - 219ms
+      X-Request-Id:
+      - req_e90ecafd7937ccd3bd31add4c0daa5b6
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=ypKQZZ9PRF15E6DkkXqKH.UWN221ChFOVD8SUsnyPew-1737381849-1.0.1.1-1d3n4oY381I_cka7nUbueiRb_B0LipTyCe20ZlXv8masMSr9.wgZANUt86Fp7uo0eVVoNLjnbC7xT2fYs7M.jA;
+        path=/; expires=Mon, 20-Jan-25 14:34:09 GMT; domain=.api.openai.com; HttpOnly;
+        Secure; SameSite=None
+      - _cfuvid=hBGl8mfVxsjX9L558tkLaRUaXnl8l0JzFGlP1xD_zz4-1737381849798-0.0.1.1-604800000;
+        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 904f9ca95bbb2319-KBP
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "id": "chatcmpl-ArmfoMvNdePIAUP7eXAsrYl1eWTgj",
+          "object": "chat.completion",
+          "created": 1737381848,
+          "model": "gpt-4o-mini-2024-07-18",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "```json\n{\n  \"name\": \"Invalid Dish\",\n  \"ingredients\": \"\",\n  \"instructions\": [],\n  \"cooking_time\": \"\",\n  \"error\": \"Invalid ingredients provided\"\n}\n```",
+                "refusal": null
+              },
+              "logprobs": null,
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 662,
+            "completion_tokens": 41,
+            "total_tokens": 703,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
+          },
+          "service_tier": "default",
+          "system_fingerprint": "fp_72ed7ab54c"
+        }
+  recorded_at: Mon, 20 Jan 2025 14:04:09 GMT
+recorded_with: VCR 6.3.1

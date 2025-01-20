@@ -3,7 +3,7 @@
 class Recipes::Generator
   GROQ = "groq".freeze
   CLAUDE = "claude".freeze
-
+  OPENAI = "openai".freeze
   attr_reader :recipe
 
   def initialize(recipe)
@@ -25,6 +25,8 @@ class Recipes::Generator
       Ai::Groq.new(prompt).call
     when CLAUDE
       Ai::Claude.new(prompt).call
+    when OPENAI
+      Ai::Openai.new(prompt).call
     else # TODO :chatgpt
       { error: "AI not found" }
     end
