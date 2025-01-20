@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class Recipes::Generator
-  attr_reader :ingredients, :ai, :soft_mode
+  GROQ = "groq".freeze
+  CLAUDE = "claude".freeze
 
-  def initialize(ingredients, ai = Site.current.settings[:default_ai], soft_mode = false)
-    @ingredients = ingredients
-    @ai = ai
-    @soft_mode = soft_mode
+  attr_reader :recipe
+
+  def initialize(recipe)
+    @recipe = recipe
   end
 
   def call
@@ -16,20 +17,16 @@ class Recipes::Generator
   private
 
   def generate
-    return { error: "invalid ingredients" } unless ingredients_valid?(ingredients)
+    return { error: recipe.errors.full_messages.join(", ") } unless recipe.valid?
 
-    prompt = Recipes::Prompt.new(ingredients, soft_mode).call
-    case ai
-    when "groq"
+    prompt = Recipes::Prompt.new(ingredients: recipe.ingredients, soft_mode: recipe.soft_mode).for_generate
+    case recipe.ai
+    when GROQ
       Ai::Groq.new(prompt).call
-    when "claude"
+    when CLAUDE
       Ai::Claude.new(prompt).call
     else # TODO :chatgpt
       { error: "AI not found" }
     end
-  end
-
-  def ingredients_valid?(ingredients)
-    ingredients.present? && ingredients.length > 3 && ingredients.length <= Site.current.settings[:max_ingredients]
   end
 end

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Ai::Claude do
   describe '#call' do
     let(:ingredients) { 'chicken, salt, pepper' }
-    let(:prompt) { Recipes::Prompt.new(ingredients, false).call }
+    let(:prompt) { Recipes::Prompt.new(ingredients: ingredients, soft_mode: false).for_generate }
     let(:claude) { described_class.new(prompt) }
 
     context 'when given a valid prompt' do

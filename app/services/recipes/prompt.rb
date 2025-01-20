@@ -3,12 +3,12 @@ class Recipes::Prompt
 
   FILE = File.read("./app/services/recipes/recipe_template.json")
 
-  def initialize(ingredients, soft_mode)
+  def initialize(ingredients:, soft_mode:)
     @ingredients = ingredients
     @soft_mode = soft_mode
   end
 
-  def call
+  def for_generate
     <<~PROMPT
     You are a world-class chef tasked with creating a recipe using a given set of ingredients. Your goal is to create a delicious dish and present the recipe in a specific JSON format.
 
@@ -41,7 +41,12 @@ class Recipes::Prompt
 
     Requirements:
     1. Validate the ingredients. If the ingredients are not valid or recognizable, return an error message in the "error" field.
-    2. Include ALL used ingredients in the "ingredients" field, including those from the input and any additional ingredients you use.
+    2. Include ALL used ingredients in the "ingredients" field.
+    #{if soft_mode
+      "If you use additional ingredients, include them in the 'ingredients' field."
+      else
+      "You can't use any other ingredients than the ones you are given."
+      end}
     3. Provide clear and concise instructions in the "instructions" array.
     4. Estimate a reasonable cooking time for the dish.
     5. Return ONLY a valid JSON structure without any additional explanation, code blocks, or descriptions.
@@ -59,7 +64,7 @@ class Recipes::Prompt
 
     3. Choose an appropriate name for your dish and set it as the "name" value.
 
-    4. List all ingredients used (both from the input and additional ones) in the "ingredients" field, separated by commas.
+    4. List ALL ingredients used in the "ingredients" field, separated by commas.
 
     5. Create a series of clear, step-by-step instructions for preparing the dish. Each step should be an object in the "instructions" array with a "step" (brief title) and "description" (more detailed explanation).
 

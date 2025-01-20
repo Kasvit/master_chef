@@ -4,7 +4,7 @@ RSpec.describe Recipes::Prompt do
   describe '#call' do
     context 'with valid ingredients' do
       let(:ingredients) { 'chicken, salt, pepper' }
-      let(:prompt) { described_class.new(ingredients, false) }
+      let(:prompt) { described_class.new(ingredients: ingredients, soft_mode: false) }
 
       it 'generates a valid prompt' do
         expected_prompt = <<~PROMPT
@@ -35,7 +35,8 @@ RSpec.describe Recipes::Prompt do
 
           Requirements:
           1. Validate the ingredients. If the ingredients are not valid or recognizable, return an error message in the "error" field.
-          2. Include ALL used ingredients in the "ingredients" field, including those from the input and any additional ingredients you use.
+          2. Include ALL used ingredients in the "ingredients" field.
+          You can't use any other ingredients than the ones you are given.
           3. Provide clear and concise instructions in the "instructions" array.
           4. Estimate a reasonable cooking time for the dish.
           5. Return ONLY a valid JSON structure without any additional explanation, code blocks, or descriptions.
@@ -53,7 +54,7 @@ RSpec.describe Recipes::Prompt do
 
           3. Choose an appropriate name for your dish and set it as the "name" value.
 
-          4. List all ingredients used (both from the input and additional ones) in the "ingredients" field, separated by commas.
+          4. List ALL ingredients used in the "ingredients" field, separated by commas.
 
           5. Create a series of clear, step-by-step instructions for preparing the dish. Each step should be an object in the "instructions" array with a "step" (brief title) and "description" (more detailed explanation).
 
@@ -64,13 +65,13 @@ RSpec.describe Recipes::Prompt do
           Remember to return ONLY the JSON structure without any additional text or explanations.
         PROMPT
 
-        expect(prompt.call.strip).to eq(expected_prompt.strip)
+        expect(prompt.for_generate.strip).to eq(expected_prompt.strip)
       end
     end
 
     context 'with soft mode' do
       let(:ingredients) { 'chicken, salt, pepper' }
-      let(:prompt) { described_class.new(ingredients, true) }
+      let(:prompt) { described_class.new(ingredients: ingredients, soft_mode: true) }
 
       it 'generates a valid prompt' do
         expected_prompt = <<~PROMPT
@@ -101,7 +102,8 @@ RSpec.describe Recipes::Prompt do
 
           Requirements:
           1. Validate the ingredients. If the ingredients are not valid or recognizable, return an error message in the "error" field.
-          2. Include ALL used ingredients in the "ingredients" field, including those from the input and any additional ingredients you use.
+          2. Include ALL used ingredients in the "ingredients" field.
+          If you use additional ingredients, include them in the 'ingredients' field.
           3. Provide clear and concise instructions in the "instructions" array.
           4. Estimate a reasonable cooking time for the dish.
           5. Return ONLY a valid JSON structure without any additional explanation, code blocks, or descriptions.
@@ -119,7 +121,7 @@ RSpec.describe Recipes::Prompt do
 
           3. Choose an appropriate name for your dish and set it as the "name" value.
 
-          4. List all ingredients used (both from the input and additional ones) in the "ingredients" field, separated by commas.
+          4. List ALL ingredients used in the "ingredients" field, separated by commas.
 
           5. Create a series of clear, step-by-step instructions for preparing the dish. Each step should be an object in the "instructions" array with a "step" (brief title) and "description" (more detailed explanation).
 
@@ -130,7 +132,7 @@ RSpec.describe Recipes::Prompt do
           Remember to return ONLY the JSON structure without any additional text or explanations.
         PROMPT
 
-        expect(prompt.call.strip).to eq(expected_prompt.strip)
+        expect(prompt.for_generate.strip).to eq(expected_prompt.strip)
       end
     end
   end

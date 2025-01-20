@@ -13,7 +13,10 @@ RSpec.describe "Api::V1::Recipes", type: :request do
       end
 
       it 'returns a recipe' do
+        allow_any_instance_of(Ai::Groq).to receive(:call).and_return({ name: 'Chicken Dish', ingredients: valid_params[:recipe][:ingredients], instructions: [], cooking_time: '30 minutes', error: nil })
+
         post '/api/v1/recipes/generate', params: valid_params
+
         expect(response).to have_http_status(:success)
         expect(parsed_response).to have_key('recipe')
       end
@@ -23,7 +26,7 @@ RSpec.describe "Api::V1::Recipes", type: :request do
       let(:invalid_params) do
         {
           recipe: {
-            ingredients: 'sal',
+            ingredients: 'sa',
             ai: 'groq'
           }
         }
@@ -32,7 +35,7 @@ RSpec.describe "Api::V1::Recipes", type: :request do
       it 'returns an error for invalid ingredients' do
         post '/api/v1/recipes/generate', params: invalid_params
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(parsed_response['recipe']['error']).to eq('invalid ingredients')
+        expect(parsed_response['recipe']['error']).to eq("Ingredients is too short (minimum is 3 characters)")
       end
     end
 
@@ -49,7 +52,7 @@ RSpec.describe "Api::V1::Recipes", type: :request do
       it 'returns an error for invalid AI' do
         post '/api/v1/recipes/generate', params: invalid_ai_params
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(parsed_response['recipe']['error']).to eq('invalid AI')
+        expect(parsed_response['recipe']['error']).to eq('Ai is not included in the list')
       end
     end
   end
