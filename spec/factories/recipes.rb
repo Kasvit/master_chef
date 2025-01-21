@@ -3,8 +3,8 @@ FactoryBot.define do
     name { "Grilled Chicken" }
     description { "A delicious Grilled Chicken." }
     ingredients { "chicken, salt, pepper" }
-    instructions do 
-      [ 
+    instructions do
+      [
         { step: "Prepare the Chicken", description: "Rinse the chicken under cold water, pat it dry with paper towels" },
         { step: "Season the Chicken", description: "Sprinkle salt and pepper evenly over both sides of the chicken" },
         { step: "Grill the Chicken", description: "Place the chicken on a preheated grill and cook for about 5-6 minutes per side, or until it reaches an internal temperature of 165°F" },

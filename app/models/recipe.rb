@@ -12,7 +12,6 @@ class Recipe
   private
 
   def ai_must_be_in_list
-    errors.add(:ai, 'is not included in the list') unless Site.current.settings[:ais].include?(ai)
+    errors.add(:ai, "is not included in the list") unless Site.current.settings[:ais].include?(ai)
   end
 end
-
