@@ -8,15 +8,12 @@ class Recipes::Validator
   end
 
   def call
-    validate
-  end
-
-  private
-
-  def validate
     return { error: recipe.errors.full_messages.join(", ") } unless recipe.valid?
 
-    prompt = Recipes::Prompt.new(recipe: recipe).for_validate
     Ai::Strategy.new(recipe.ai, prompt).call
+  end
+
+  def prompt
+    Recipes::Prompt.new(recipe: recipe).for_validate
   end
 end

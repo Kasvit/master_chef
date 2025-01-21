@@ -9,13 +9,13 @@ class Ai::Strategy
   end
 
   def call
-    case @ai
+    case ai
     when Ai::Groq::NAME
-      Ai::Groq.new(@prompt).call
+      Ai::Groq.new(prompt).call
     when Ai::Claude::NAME
-      Ai::Claude.new(@prompt).call
+      Ai::Claude.new(prompt).call
     when Ai::Openai::NAME
-      Ai::Openai.new(@prompt).call
+      Ai::Openai.new(prompt).call
     else
       { error: "AI not found" }
     end

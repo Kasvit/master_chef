@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Ai::Groq do
   describe '#call' do
-    let(:recipe) { build(:recipe, ingredients: 'chicken, salt, pepper', soft_mode: false) }
+    let(:recipe) { build(:recipe) }
     let(:prompt) { Recipes::Prompt.new(recipe: recipe).for_generate }
     let(:groq) { described_class.new(prompt) }
 
@@ -19,8 +19,6 @@ RSpec.describe Ai::Groq do
     end
 
     context 'when the prompt is invalid' do
-      let(:ingredients) { '' }
-
       it 'returns an error message' do
         VCR.use_cassette('ai/groq/failed_generates_recipe') do
           result = groq.call

@@ -1,7 +1,7 @@
 class Api::V1::RecipesController < ApplicationController
   include RailsRateLimit::Controller
 
-  set_rate_limit limit: 3, period: 5.seconds, only: [ :generate ]
+  set_rate_limit limit: 5, period: 5.seconds
 
   def generate
     @recipe = Recipe.new(generate_params)

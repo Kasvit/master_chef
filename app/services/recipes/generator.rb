@@ -8,15 +8,13 @@ class Recipes::Generator
   end
 
   def call
-    generate
+    return { error: recipe.errors.full_messages.join(", ") } unless recipe.valid?
+    # debugger
+
+    Ai::Strategy.new(recipe.ai, prompt).call
   end
 
-  private
-
-  def generate
-    return { error: recipe.errors.full_messages.join(", ") } unless recipe.valid?
-
-    prompt = Recipes::Prompt.new(recipe: recipe).for_generate
-    Ai::Strategy.new(recipe.ai, prompt).call
+  def prompt
+    Recipes::Prompt.new(recipe: recipe).for_generate
   end
 end

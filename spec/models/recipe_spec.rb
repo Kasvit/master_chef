@@ -12,11 +12,11 @@ RSpec.describe Recipe, type: :model do
 
   describe 'attributes' do
     it 'has a name' do
-      expect(subject.name).to eq("Sample Recipe")
+      expect(subject.name).to eq("Grilled Chicken")
     end
 
     it 'has a description' do
-      expect(subject.description).to eq("A delicious sample recipe.")
+      expect(subject.description).to eq("A delicious Grilled Chicken.")
     end
 
     it 'has ingredients' do
@@ -24,11 +24,11 @@ RSpec.describe Recipe, type: :model do
     end
 
     it 'has instructions' do
-      expect(subject.instructions).to eq([ { step: "Prepare the ingredients", description: "Prepare the ingredients" } ])
+      expect(subject.instructions).to eq([ { step: "Prepare the Chicken", description: "Rinse the chicken under cold water, pat it dry with paper towels" }, { step: "Season the Chicken", description: "Sprinkle salt and pepper evenly over both sides of the chicken" }, { step: "Grill the Chicken", description: "Place the chicken on a preheated grill and cook for about 5-6 minutes per side, or until it reaches an internal temperature of 165°F" }, { step: "Rest the Chicken", description: "Once cooked, remove the chicken from the grill and let it rest for a few minutes before serving" } ])
     end
 
     it 'has cooking time' do
-      expect(subject.cooking_time).to eq("30 minutes")
+      expect(subject.cooking_time).to eq("20 minutes")
     end
 
     it 'has an error message' do

@@ -58,7 +58,7 @@ If you would like to contribute to the project, please create a new pull request
 - [x] Add a checkbox on UI to allow the AI to use additional ingredients Feel free to use any other ingredients that you can find in your kitchen.
 - [x] Add tailwind, update styles
 - [x] Add CI
-- [ ] Validate the generated recipe
-- [ ] Add swagger documentation
+- [x] Validate the generated recipe
+- [ ] Add swagger documentation ?
 - [ ] Add storybooks https://storybook.js.org/docs/get-started/frameworks/react-vite
 - [ ] Deploy

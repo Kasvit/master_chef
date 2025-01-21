@@ -1,0 +1,108 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.groq.com/openai/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"llama-3.1-70b-versatile","messages":[{"role":"user","content":"You
+        are a world-class chef. Your goal is to validate the uploaded recipe and return
+        the recipe in a specific JSON format.\n\nYou will be given a JSON object with
+        the recipe fields:\n<recipe>\n{\"name\" => \"Grilled Chicken\", \"ingredients\"
+        => \"chicken, salt, pepper\", \"instructions\" => [{\"step\" => \"Prepare
+        the Chicken\", \"description\" => \"Rinse the chicken under cold water, pat
+        it dry with paper towels\"}, {\"step\" => \"Season the Chicken\", \"description\"
+        => \"Sprinkle salt and pepper evenly over both sides of the chicken\"}, {\"step\"
+        => \"Grill the Chicken\", \"description\" => \"Place the chicken on a preheated
+        grill and cook for about 5-6 minutes per side, or until it reaches an internal
+        temperature of 165°F\"}, {\"step\" => \"Rest the Chicken\", \"description\"
+        => \"Once cooked, remove the chicken from the grill and let it rest for a
+        few minutes before serving\"}], \"cooking_time\" => \"20 minutes\", \"error\"
+        => \"\"}\n</recipe>\n\nThe recipe response should be returned in the following
+        JSON format:\n```json\n{\n  \"name\": \"dish name\",\n  \"ingredients\": \"comma-separated
+        list of ingredients\",\n  \"instructions\": [\n    {\n      \"step\": \"step
+        name\",\n      \"description\": \"step description\"\n    }\n  ],\n  \"cooking_time\":
+        \"cooking time in minutes\",\n  \"error\": \"\"\n}\n```\n\nRequirements:\n1.
+        Validate the recipe. If the recipe is not valid, return an error message in
+        the \"error\" field.\n2. Return ONLY a valid JSON structure without any additional
+        explanation, code blocks, or descriptions.\n\nExample of the response:\n```json\n{\n  \"name\":
+        \"salad\",\n  \"ingredients\": \"lettuce, tomato, cucumber\",\n  \"instructions\":
+        [\n    { \n      \"step\":  \"prepare\", \n      \"description\": \"prepare
+        the ingredients\" \n    },\n    {\n      \"step\": \"chop the lettuce\",\n      \"description\":
+        \"chop the lettuce\"\n    },\n    {\n      \"step\": \"chop the tomato\",\n      \"description\":
+        \"chop the tomato\"\n    },\n    {\n      \"step\": \"chop the cucumber\",\n      \"description\":
+        \"chop the cucumber\"\n    },\n    {\n      \"step\": \"mix the ingredients\",\n      \"description\":
+        \"mix the ingredients\"\n    }\n  ],\n  \"cooking_time\": \"10 minutes\",\n  \"error\":
+        \"\"\n}\n```\n\nTo complete this task:\n\n1. First, examine the given recipe
+        carefully. If it is not valid, set the \"error\" field to \"Invalid recipe
+        provided\" and leave the other fields empty.\n\n2. If the ingredients are
+        valid and can be used to make this dish, return the same ingredients in the
+        \"ingredients\" field.\n\n3. Check if the name is valid and can be used to
+        name this dish, set it as the \"name\" value.\n\n4. Check if the instructions
+        are valid and can be used to prepare this dish, set them as the \"instructions\"
+        field.\n\n5. Check if the cooking time is valid and can be used to prepare
+        this dish, set it as the \"cooking_time\" value.\n\n6. Ensure that your output
+        is a valid JSON structure and contains only the specified fields.\n\nRemember
+        to return ONLY the JSON structure without any additional text or explanations.\n"}],"max_tokens":1024,"temperature":1}'
+    headers:
+      Authorization:
+      - Bearer <GROQ_API_KEY>
+      User-Agent:
+      - groq-ruby/0.3.2
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 21 Jan 2025 13:09:27 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cf-Ray:
+      - 905789e58957ca55-KBP
+      Cf-Cache-Status:
+      - DYNAMIC
+      Cache-Control:
+      - private, max-age=0, no-store, no-cache, must-revalidate
+      Vary:
+      - Origin, Accept-Encoding
+      X-Groq-Region:
+      - me-central-1
+      X-Ratelimit-Limit-Requests:
+      - '14400'
+      X-Ratelimit-Limit-Tokens:
+      - '6000'
+      X-Ratelimit-Remaining-Requests:
+      - '14399'
+      X-Ratelimit-Remaining-Tokens:
+      - '5275'
+      X-Ratelimit-Reset-Requests:
+      - 6s
+      X-Ratelimit-Reset-Tokens:
+      - 7.25s
+      X-Request-Id:
+      - req_01jj4fpv02f49r4jngg4n9gjf6
+      Set-Cookie:
+      - __cf_bm=hcvb1TigTEfSy2_fI.O7q7eYMZVTH3Ec4IJCZH2Ufww-1737464967-1.0.1.1-ejprp_.b.qk4wa8Bum1w11yfDuDuQ3DUKWio6fUHr9werxItu1zH69iFfO0EG9x5SJ2gHorYRmYHTYGSy6mDAA;
+        path=/; expires=Tue, 21-Jan-25 13:39:27 GMT; domain=.groq.com; HttpOnly; Secure;
+        SameSite=None
+      Server:
+      - cloudflare
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJpZCI6ImNoYXRjbXBsLWI0ZDZhNDM1LTcxNjUtNGViOC05YmQ5LTRiMmZhYzQ4MGRjYSIsIm9iamVjdCI6ImNoYXQuY29tcGxldGlvbiIsImNyZWF0ZWQiOjE3Mzc0NjQ5NjYsIm1vZGVsIjoibGxhbWEtMy4xLTcwYi12ZXJzYXRpbGUiLCJjaG9pY2VzIjpbeyJpbmRleCI6MCwibWVzc2FnZSI6eyJyb2xlIjoiYXNzaXN0YW50IiwiY29udGVudCI6ImBgYGpzb25cbntcbiAgXCJuYW1lXCI6IFwiR3JpbGxlZCBDaGlja2VuXCIsXG4gIFwiaW5ncmVkaWVudHNcIjogXCJjaGlja2VuLCBzYWx0LCBwZXBwZXJcIixcbiAgXCJpbnN0cnVjdGlvbnNcIjogW1xuICAgIHtcbiAgICAgIFwic3RlcFwiOiBcIlByZXBhcmUgdGhlIENoaWNrZW5cIixcbiAgICAgIFwiZGVzY3JpcHRpb25cIjogXCJSaW5zZSB0aGUgY2hpY2tlbiB1bmRlciBjb2xkIHdhdGVyLCBwYXQgaXQgZHJ5IHdpdGggcGFwZXIgdG93ZWxzXCJcbiAgICB9LFxuICAgIHtcbiAgICAgIFwic3RlcFwiOiBcIlNlYXNvbiB0aGUgQ2hpY2tlblwiLFxuICAgICAgXCJkZXNjcmlwdGlvblwiOiBcIlNwcmlua2xlIHNhbHQgYW5kIHBlcHBlciBldmVubHkgb3ZlciBib3RoIHNpZGVzIG9mIHRoZSBjaGlja2VuXCJcbiAgICB9LFxuICAgIHtcbiAgICAgIFwic3RlcFwiOiBcIkdyaWxsIHRoZSBDaGlja2VuXCIsXG4gICAgICBcImRlc2NyaXB0aW9uXCI6IFwiUGxhY2UgdGhlIGNoaWNrZW4gb24gYSBwcmVoZWF0ZWQgZ3JpbGwgYW5kIGNvb2sgZm9yIGFib3V0IDUtNiBtaW51dGVzIHBlciBzaWRlLCBvciB1bnRpbCBpdCByZWFjaGVzIGFuIGludGVybmFsIHRlbXBlcmF0dXJlIG9mIDE2NcKwRlwiXG4gICAgfSxcbiAgICB7XG4gICAgICBcInN0ZXBcIjogXCJSZXN0IHRoZSBDaGlja2VuXCIsXG4gICAgICBcImRlc2NyaXB0aW9uXCI6IFwiT25jZSBjb29rZWQsIHJlbW92ZSB0aGUgY2hpY2tlbiBmcm9tIHRoZSBncmlsbCBhbmQgbGV0IGl0IHJlc3QgZm9yIGEgZmV3IG1pbnV0ZXMgYmVmb3JlIHNlcnZpbmdcIlxuICAgIH1cbiAgXSxcbiAgXCJjb29raW5nX3RpbWVcIjogXCIyMCBtaW51dGVzXCIsXG4gIFwiZXJyb3JcIjogXCJcIlxufVxuYGBgIn0sImxvZ3Byb2JzIjpudWxsLCJmaW5pc2hfcmVhc29uIjoic3RvcCJ9XSwidXNhZ2UiOnsicXVldWVfdGltZSI6MC4wMDQ1MzEyODc5OTk5OTk5OTQsInByb21wdF90b2tlbnMiOjczMiwicHJvbXB0X3RpbWUiOjAuMDc3NzkwNDE2LCJjb21wbGV0aW9uX3Rva2VucyI6MjA1LCJjb21wbGV0aW9uX3RpbWUiOjAuNzQ1NDU0NTQ1LCJ0b3RhbF90b2tlbnMiOjkzNywidG90YWxfdGltZSI6MC44MjMyNDQ5NjF9LCJzeXN0ZW1fZmluZ2VycHJpbnQiOiJmcF8yZjQ4N2M0MDEzIiwieF9ncm9xIjp7ImlkIjoicmVxXzAxamo0ZnB2MDJmNDlyNGpuZ2c0bjlnamY2In19Cg==
+  recorded_at: Tue, 21 Jan 2025 13:09:26 GMT
+recorded_with: VCR 6.3.1

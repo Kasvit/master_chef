@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Recipes::Prompt do
   describe '#call' do
     context 'with valid ingredients' do
-      let(:recipe) { build(:recipe, ingredients: 'chicken, salt, pepper', soft_mode: false) }
+      let(:recipe) { build(:recipe) }
       let(:prompt) { described_class.new(recipe: recipe) }
 
       it 'generates a valid prompt' do
@@ -70,7 +70,7 @@ RSpec.describe Recipes::Prompt do
     end
 
     context 'with soft mode' do
-      let(:recipe) { build(:recipe, ingredients: 'chicken, salt, pepper', soft_mode: true) }
+      let(:recipe) { build(:recipe, soft_mode: true) }
       let(:prompt) { described_class.new(recipe: recipe) }
 
       it 'generates a valid prompt' do

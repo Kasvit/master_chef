@@ -1,19 +1,20 @@
 require 'rails_helper'
 
-RSpec.describe Recipes::Generator do
+RSpec.describe Recipes::Validator do
   describe '#call' do
     context 'with valid ingredients' do
       let(:recipe) { build(:recipe) }
       let(:generator) { described_class.new(recipe: recipe) }
 
-      it 'returns a recipe', vcr: { cassette_name: 'ai/groq/generates_recipe' } do
+      it 'returns a recipe', vcr: { cassette_name: 'ai/groq/validates_recipe' } do
         result = generator.call
+
         expect(result).to have_key('name')
         expect(result).to have_key('ingredients')
         expect(result).to have_key('instructions')
         expect(result).to have_key('cooking_time')
         expect(result).to have_key('error')
-        expect(result['name']).to eq('Grilled Chicken')
+        expect(result['name']).to eq(recipe.name)
       end
     end
 
